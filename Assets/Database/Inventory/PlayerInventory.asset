@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff753c53588a9546a7411e015010af0, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  inventorySlotPrefab: {fileID: 4158027305948136714, guid: 68b857f4a6be6d44096f28d205ad2e43, type: 3}
-  slotsCount: 3
-  inventorySlots: []
+  inventoryDefaultItemSlot: {fileID: 11400000, guid: 126bef25d5a1d244694c4519a32abdf5, type: 2}
+  inventoryPanel: {fileID: 3812736811557177166, guid: 4db95659a2ffe3f449a5c5669a131468, type: 3}
+  inventoryFrameSlotPrefab: {fileID: 0}
+  inventorySlots:
+  - frameSlot: {fileID: 0}
+    item: {fileID: 0}
+  slots: []

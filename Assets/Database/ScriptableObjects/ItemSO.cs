@@ -10,6 +10,17 @@ public enum ItemType
 }
 public abstract class ItemSO : ScriptableObject
 {
-    [SerializeField] GameObject itemPrefab;
-    [SerializeField] ItemType type;
+    [SerializeField] Sprite itemSprite;
+    [SerializeField] string itemName;
+    public ItemType type;
+
+    public Sprite GetItemSprite()
+    {
+        return itemSprite;
+    }
+
+    public string GetItemName()
+    {
+        return itemName;
+    }
 }

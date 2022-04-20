@@ -5,15 +5,18 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] InventorySO inventory;
+    [SerializeField] ItemSO itemToAdd;
     // Start is called before the first frame update
     void Start()
     {
-        inventory.InitializeInventory();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            inventory.AddItemInInventory(itemToAdd);
+        }
     }
 }
