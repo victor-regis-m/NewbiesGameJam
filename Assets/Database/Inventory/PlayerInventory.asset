@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db7fe6863609d7b4bb42384147f42e38, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: 2ff753c53588a9546a7411e015010af0, type: 3}
+  m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  itemName: Swoed
-  icon: {fileID: 0}
-  weight: 5
+  inventorySlotPrefab: {fileID: 4158027305948136714, guid: 68b857f4a6be6d44096f28d205ad2e43, type: 3}
+  slotsCount: 3
+  inventorySlots: []
