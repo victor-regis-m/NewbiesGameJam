@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ff753c53588a9546a7411e015010af0, type: 3}
-  m_Name: PlayerInventory
+  m_Script: {fileID: 11500000, guid: c41a0731a11e6634f83ce5c678120c4f, type: 3}
+  m_Name: Default Slot
   m_EditorClassIdentifier: 
-  defaultSlotItem: {fileID: 11400000, guid: aa8d81d59784cc847b1e252a664e5ad7, type: 2}
-  numberOfSlots: 5
-  container: []
+  itemPrefab: {fileID: 376854126651240934, guid: 68b857f4a6be6d44096f28d205ad2e43, type: 3}
+  itemName: 
+  itemWeight: 0
+  type: 5

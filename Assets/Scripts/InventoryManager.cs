@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     [SerializeField] InventorySO inventory;
     
@@ -10,7 +10,7 @@ public class PickUp : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            inventory.DropItem();
+            inventory.DropItem(0);
         }
     }
 
@@ -22,5 +22,10 @@ public class PickUp : MonoBehaviour
             inventory.AddItem(item.item);
             Destroy(other.gameObject);
         }
+    }
+
+    private void OnApplicationQuit() 
+    {
+        inventory.container.Clear();
     }
 }

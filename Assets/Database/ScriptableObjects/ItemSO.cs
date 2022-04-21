@@ -8,21 +8,34 @@ public enum ItemType
     Helmet,
     BodyArmor,
     Greaves,
-    Cloak
+    Cloak,
+    Default
 }
 public abstract class ItemSO : ScriptableObject
 {
-    [SerializeField] Sprite itemSprite;
+    public GameObject itemPrefab;
+    [SerializeField] Sprite itemImage;
     [SerializeField] string itemName;
+    [SerializeField] float itemWeight;
     public ItemType type;
 
-    public Sprite GetItemSprite()
+    public GameObject GetItemPrefab()
     {
-        return itemSprite;
+        return itemPrefab;
+    }
+
+    public Sprite GetItemimage()
+    {
+        return itemImage;
     }
 
     public string GetItemName()
     {
         return itemName;
+    }
+    
+    public float GetItemWeight()
+    {
+        return itemWeight;
     }
 }

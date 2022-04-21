@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b93b8761ba9b546b55621dcbd021d5, type: 3}
-  m_Name: Weapon1
+  m_Script: {fileID: 11500000, guid: de5562822b6874a4a821971cd80911c4, type: 3}
+  m_Name: Helm
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
+  itemPrefab: {fileID: 5938988094783702712, guid: 1d33c29ed5863764a82b2901c118ff6e, type: 3}
+  itemImage: {fileID: 0}
   itemName: 
-  type: 0
+  itemWeight: 0
+  type: 1
