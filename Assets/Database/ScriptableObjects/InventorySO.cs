@@ -5,45 +5,40 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Database/Create Inventory", order = 0)]
 public class InventorySO : ScriptableObject
 {
-    [SerializeField] ItemSO inventoryDefaultItemSlot;
-    [SerializeField] GameObject inventoryPanel;
-    [SerializeField] GameObject inventoryFrameSlotPrefab;
-    [SerializeField] List<InventorySlot> inventorySlots;
-    [SerializeField] GameObject[] slots;
+    public List<InventorySlot> Container = new List<InventorySlot>();
 
-    void Update()
+    public bool CheckIfHaveItemType(ItemSO _item)
     {
-        Debug.Log(inventorySlots.Count);
-        if(slots.Length != inventorySlots.Count)
+        for(int i = 0; i < Container.Count; i++) 
         {
-            for(int i = 0; i < slots.Length; i++) 
+            if(Container[i].item.type ==_item.type)
             {
-                Destroy(slots[i].gameObject);
-            }
-            slots = new GameObject[inventorySlots.Count];
-            for(int i = 0; i < inventorySlots.Count; i++) 
-            {
-                slots[i] = Instantiate(inventorySlots[i].frameSlot,new Vector2(0,0), Quaternion.identity);
-                slots[i].transform.parent = inventoryPanel.transform;
+                return true;
             }
         }
+        return false;
+    }
+    public void AddItem(ItemSO _item)
+    {
+        Container.Add(new InventorySlot(_item));
     }
 
-    public void AddItemInInventory(ItemSO itemToAdd)
+    public void DropItem()
     {
-        inventorySlots.Add(new InventorySlot(inventoryFrameSlotPrefab, itemToAdd));
+        if(Container.Count > 0)
+        {
+            Container.RemoveAt(0);
+        }
     }
 }
 
 [System.Serializable]
 public class InventorySlot
 {
-    public GameObject frameSlot;
     public ItemSO item;
 
-    public InventorySlot(GameObject frameSlot, ItemSO item)
+    public InventorySlot(ItemSO item)
     {
         this.item = item;
-        this.frameSlot = frameSlot;
     }
 }

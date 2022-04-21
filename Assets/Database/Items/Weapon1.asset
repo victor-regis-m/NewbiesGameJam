@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c41a0731a11e6634f83ce5c678120c4f, type: 3}
-  m_Name: DefaultItem
+  m_Script: {fileID: 11500000, guid: e4b93b8761ba9b546b55621dcbd021d5, type: 3}
+  m_Name: Weapon1
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 7537335274523984609, guid: 5be038b00c7f23e4e86301cc944b2489, type: 3}
-  type: 2
+  itemSprite: {fileID: 0}
+  itemName: 
+  type: 0
