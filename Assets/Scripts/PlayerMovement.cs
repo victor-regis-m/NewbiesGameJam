@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     GameObject player;
     Rigidbody2D playerRB;
-    [SerializeField][Range(0,300)]float playerSpeed = 140;
-    [SerializeField][Range(0,200)]float playerWeight = 70;
-    [SerializeField][Range(0,1000)]float jumpForce = 300;
+    [SerializeField][Range(0,500)]float playerSpeed = 240;
+    [SerializeField][Range(0,300)]float playerWeight = 80;
+    [SerializeField][Range(0,1500)]float jumpForce = 300;
     bool canJummp;
 
     Vector3 left = new Vector3(1,0,0);
