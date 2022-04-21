@@ -2,26 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Database/CreateItem", order = 1)]
-public class ItemSO : ScriptableObject
+public enum ItemType
 {
+    Weapon,
+    Helmet,
+    BodyArmor,
+    Greaves,
+    Cloak,
+    Default
+}
+public abstract class ItemSO : ScriptableObject
+{
+    public GameObject itemPrefab;
+    [SerializeField] Sprite itemImage;
     [SerializeField] string itemName;
-    [SerializeField] bool canUse;
-    [SerializeField] Sprite icon;
-    [SerializeField] float weight;
+    [SerializeField] float itemWeight;
+    public ItemType type;
 
-    public string GetName()
+    public GameObject GetItemPrefab()
+    {
+        return itemPrefab;
+    }
+
+    public Sprite GetItemimage()
+    {
+        return itemImage;
+    }
+
+    public string GetItemName()
     {
         return itemName;
     }
-    public Sprite GetIcon()
-    {
-        return icon;
-    } 
-    public float GetWeight()
-    {
-        return weight;
-    }
-
     
+    public float GetItemWeight()
+    {
+        return itemWeight;
+    }
 }
