@@ -11,17 +11,18 @@ public class InventorySO : ScriptableObject
 
     public void InitializeInventory()
     {
-       for(int i = container.Count; i < numberOfSlots; i++) 
-       {
-           container.Add(new InventorySlot(defaultSlotItem));
-       }
+        defaultSlotItem.SetSpriteOnItemPrefab(defaultSlotItem.GetItemimage());
+        for(int i = container.Count; i < numberOfSlots; i++) 
+        {
+            container.Add(new InventorySlot(defaultSlotItem));
+        }
     }
 
-    public bool CheckIfHaveItemType(ItemSO _item)
+    public bool CheckIfHaveItemType(ItemSO item)
     {
         for(int i = 0; i < container.Count; i++) 
         {
-            if(container[i].item.type ==_item.type)
+            if(container[i].item.type == item.type)
             {
                 return true;
             }
@@ -29,13 +30,13 @@ public class InventorySO : ScriptableObject
         return false;
     }
 
-    public void AddItem(ItemSO _item)
+    public void AddItem(ItemSO item)
     {
         for(int i = 0; i < container.Count; i++) 
         {
             if(container[i].item == defaultSlotItem)
             {
-                container[i].item = _item;
+                container[i].item = item;
                 break;
             }
         }

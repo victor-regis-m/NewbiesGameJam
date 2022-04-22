@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc78b0e86b3ad34f9c39db7ae081693, type: 3}
   m_Name: Body
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 5938988094783702712, guid: 1d33c29ed5863764a82b2901c118ff6e, type: 3}
-  itemImage: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
+  itemPrefab: {fileID: 5348004916760088609, guid: e309062da7cc4e443944bda88fd124aa, type: 3}
+  itemImage: {fileID: -5177388603050735206, guid: d058bbf7e52a3e541b7d8b7f9ac15308, type: 3}
   itemName: 
   itemWeight: 0
   type: 2

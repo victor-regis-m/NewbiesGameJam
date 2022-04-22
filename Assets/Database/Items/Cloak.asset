@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1558146bef947b74292cd525ee7fdab1, type: 3}
   m_Name: Cloak
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 5938988094783702712, guid: 1d33c29ed5863764a82b2901c118ff6e, type: 3}
-  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 5348004916760088609, guid: 1e5b6be19e152b5438f7ad4affa0783f, type: 3}
+  itemImage: {fileID: -2413806693520163455, guid: bb684380bbb7bba48a76eb130dbb9a52, type: 3}
   itemName: 
   itemWeight: 0
   type: 4
