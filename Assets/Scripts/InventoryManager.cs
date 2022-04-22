@@ -14,6 +14,9 @@ public class InventoryManager : MonoBehaviour
     
     void Update() 
     {
+        /*At key down this code drops the element on position 
+        0 in my inventory list and reset the display*/
+        //To be reworked
         if(Input.GetKeyDown(KeyCode.E))
         {
             inventory.DropItem(0);
@@ -21,6 +24,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    /* On trigger the item is added automatically to the inventory, 
+    this has to be changed for the action to happen when key down*/
+    //To be reworked
     private void OnTriggerEnter2D(Collider2D other) 
     {
         var item = other.GetComponent<Item>();
@@ -32,12 +38,17 @@ public class InventoryManager : MonoBehaviour
 
     private void AddItemInInventory(Collider2D other, Item item)
     {
-        other.GetComponent<Item>().ResetSprite();
+        //Reset Item Sprite
+        item.ResetSprite();
+        //Add item to the inventory using the prefab UI attached
         inventory.AddItem(item.item);
+        //Destroy this gameobject
         Destroy(other.gameObject);
+        //Refresh display to show the latest update
         displayInventory.RefreshDisplay();
     }
 
+    //This function resets the inventory when the application terminates
     private void OnApplicationQuit() 
     {
         inventory.container.Clear();
