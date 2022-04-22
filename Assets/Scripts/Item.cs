@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
     public ItemSO item;
 
-    void Start()
+    void Awake()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = item.GetItemimage();
-        Image img = item.itemPrefab.GetComponent<Image>();
-        img.sprite = sr.sprite;
+        item.SetSpriteOnItemPrefab(sr.sprite);
+    }
 
-        Debug.Log(img.sprite.name);
+    public void ResetSprite()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        item.SetSpriteOnItemPrefab(item.GetItemimage());
     }
 }

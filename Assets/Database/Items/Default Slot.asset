@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41a0731a11e6634f83ce5c678120c4f, type: 3}
   m_Name: Default Slot
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 376854126651240934, guid: 68b857f4a6be6d44096f28d205ad2e43, type: 3}
+  itemPrefab: {fileID: 376854126651240934, guid: a3ea4ac4347746348ad7d588f0a173fb, type: 3}
+  itemImage: {fileID: 7482667652216324306, guid: f2a91f6701612614284a5a89d03b2316, type: 3}
   itemName: 
   itemWeight: 0
   type: 5

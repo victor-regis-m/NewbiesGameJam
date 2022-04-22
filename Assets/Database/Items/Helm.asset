@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5562822b6874a4a821971cd80911c4, type: 3}
   m_Name: Helm
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 5938988094783702712, guid: 1d33c29ed5863764a82b2901c118ff6e, type: 3}
-  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 5348004916760088609, guid: 85c1d275ac5f71b418519baf2f365856, type: 3}
+  itemImage: {fileID: 7482667652216324306, guid: f2a91f6701612614284a5a89d03b2316, type: 3}
   itemName: 
   itemWeight: 0
   type: 1

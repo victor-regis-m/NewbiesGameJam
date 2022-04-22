@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ItemType
 {
@@ -13,7 +14,7 @@ public enum ItemType
 }
 public abstract class ItemSO : ScriptableObject
 {
-    public GameObject itemPrefab;
+    [SerializeField] GameObject itemPrefab;
     [SerializeField] Sprite itemImage;
     [SerializeField] string itemName;
     [SerializeField] float itemWeight;
@@ -37,5 +38,10 @@ public abstract class ItemSO : ScriptableObject
     public float GetItemWeight()
     {
         return itemWeight;
+    }
+
+    public void SetSpriteOnItemPrefab(Sprite sprite)
+    {
+        itemPrefab.GetComponent<Image>().sprite = sprite;
     }
 }
