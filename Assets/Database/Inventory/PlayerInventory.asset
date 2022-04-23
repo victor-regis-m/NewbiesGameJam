@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff753c53588a9546a7411e015010af0, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  defaultSlotItem: {fileID: 11400000, guid: aa8d81d59784cc847b1e252a664e5ad7, type: 2}
+  defaultSlotIcon: {fileID: 11400000, guid: aa8d81d59784cc847b1e252a664e5ad7, type: 2}
   numberOfSlots: 5
   container: []

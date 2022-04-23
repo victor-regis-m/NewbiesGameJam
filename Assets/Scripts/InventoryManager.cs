@@ -7,39 +7,101 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] InventorySO inventory;
 
     DisplayInventory displayInventory;
+    Collider2D collid2D;
+    bool canPickUp = false;
+
     void Start()
     {
         displayInventory = FindObjectOfType<DisplayInventory>();
     }
     
-    void Update() 
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            inventory.DropItem(0);
-            displayInventory.RefreshDisplay();
-        }
+        /*At key down this code drops the element on position 
+        0 in my inventory list and reset the display*/
+        DropItemLogic();
+        AddItemLogic();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    /* On trigger the item is added automatically to the inventory, 
+    this has to be changed for the action to happen when key down*/
+    //To be reworked 
+    //Bug known the player can not pick up more than one item if multiple are in exact spot
+    void OnTriggerStay2D(Collider2D other)
     {
-        var item = other.GetComponent<Item>();
-        if(other.GetComponent<Item>() && !inventory.CheckIfHaveItemType(item.item))
-        {
-            AddItemInInventory(other, item);
-        }
+        canPickUp = true;
+        Debug.Log("This is bool on Stay: " + canPickUp);
+        collid2D = other;
     }
 
-    private void AddItemInInventory(Collider2D other, Item item)
+    void OnTriggerExit2D(Collider2D other) 
     {
-        other.GetComponent<Item>().ResetSprite();
+        
+        canPickUp = false;
+        Debug.Log("This is bool on Exit: " + canPickUp);
+    }
+
+
+
+    //This function resets the inventory when the application terminates
+    void OnApplicationQuit() 
+    {
+        inventory.container.Clear();
+    }
+
+    private void AddItemLogic()
+    {
+        if (canPickUp && Input.GetKeyDown(KeyCode.E))
+        {
+            var item = collid2D.GetComponent<Item>();
+            if (collid2D.GetComponent<Item>() && !inventory.CheckIfHaveItemType(item.item))
+            {
+                AddItemInInventory(item);
+            }
+        }
+    }
+    
+    void AddItemInInventory(Item item)
+    {
+        item.ResetSprite();
         inventory.AddItem(item.item);
-        Destroy(other.gameObject);
+        Destroy(collid2D.gameObject);
         displayInventory.RefreshDisplay();
     }
 
-    private void OnApplicationQuit() 
+    private void DropItemLogic()
     {
-        inventory.container.Clear();
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            DropItem(0);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            DropItem(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            DropItem(2);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            DropItem(3);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            DropItem(4);
+        }
+    }
+
+    void DropItem(int index)
+    {
+        if(inventory.container[index].item != inventory.GetDefaultSlotIcon())
+        {
+            var itemToSpawn = new GameObject("Item");
+            itemToSpawn.gameObject.AddComponent<Item>().item = inventory.container[index].item;
+            itemToSpawn.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            inventory.DropItem(index);
+            displayInventory.RefreshDisplay();
+        }
     }
 }

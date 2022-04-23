@@ -9,28 +9,22 @@ public class DisplayInventory : MonoBehaviour
 
     void Start() 
     {
+        //Initialise the display at run
          inventory.InitializeInventory();
          CreateDisplay();
     }
 
-    void Update() 
-    {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            RefreshDisplay();
-        }
-    }
-
+    //Initialize the UI prefab within the Inventory panel UI
     public void CreateDisplay()
     {
         for(int i = 0; i < inventory.container.Count; i++) 
         {
             var obj = Instantiate(inventory.container[i].item.GetItemPrefab(), Vector3.zero, Quaternion.identity);
             obj.transform.SetParent(gameObject.transform);
-            Debug.Log("I created " + (i + 1) + " slots name: " + obj.GetComponent<Image>().sprite.name);
         }
     }
 
+    //This function recreates all the slots as a refresh
     public void RefreshDisplay()
     {
         foreach(Transform child in gameObject.transform)
