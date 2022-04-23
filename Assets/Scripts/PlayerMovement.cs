@@ -36,6 +36,15 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         gameObject.transform.position +=  Input.GetAxis("Horizontal")*left*playerSpeed*Time.deltaTime/playerWeight;
+        AdjustGameObjectDirectionToMovement();
+    }
+
+    void AdjustGameObjectDirectionToMovement()
+    {
+        if(Input.GetKeyDown(KeyCode.D))
+            transform.rotation = Quaternion.Euler(0,0,0);
+        if(Input.GetKeyDown(KeyCode.A))
+            transform.rotation = Quaternion.Euler(0,180,0);
     }
 
     void Jump()
