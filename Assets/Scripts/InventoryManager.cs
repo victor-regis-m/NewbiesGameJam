@@ -7,11 +7,11 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] InventorySO inventory;
 
     DisplayInventory displayInventory;
-    Collider2D collid2D;
-    bool canPickUp = false;
+    [SerializeField]List<Item> pickableItems;
 
     void Start()
     {
+        pickableItems = new List<Item>();
         displayInventory = FindObjectOfType<DisplayInventory>();
     }
     
@@ -22,26 +22,18 @@ public class InventoryManager : MonoBehaviour
         DropItemLogic();
         AddItemLogic();
     }
-
-    /* On trigger the item is added automatically to the inventory, 
-    this has to be changed for the action to happen when key down*/
-    //To be reworked 
-    //Bug known the player can not pick up more than one item if multiple are in exact spot
-    void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) 
     {
-        canPickUp = true;
-        Debug.Log("This is bool on Stay: " + canPickUp);
-        collid2D = other;
+        Item interactable = other.gameObject.GetComponent<Item>();
+        if(interactable!=null)
+            pickableItems.Add(interactable);
     }
-
     void OnTriggerExit2D(Collider2D other) 
     {
-        
-        canPickUp = false;
-        Debug.Log("This is bool on Exit: " + canPickUp);
+        Item interactable = other.gameObject.GetComponent<Item>();
+        if(interactable!=null)
+            pickableItems.Remove(interactable);
     }
-
-
 
     //This function resets the inventory when the application terminates
     void OnApplicationQuit() 
@@ -51,10 +43,11 @@ public class InventoryManager : MonoBehaviour
 
     private void AddItemLogic()
     {
-        if (canPickUp && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && pickableItems.Count>0)
         {
-            var item = collid2D.GetComponent<Item>();
-            if (collid2D.GetComponent<Item>() && !inventory.CheckIfHaveItemType(item.item))
+            var item = pickableItems[0];
+            pickableItems.Remove(item);
+            if (!inventory.CheckIfHaveItemType(item.item))
             {
                 AddItemInInventory(item);
             }
@@ -65,7 +58,7 @@ public class InventoryManager : MonoBehaviour
     {
         item.ResetSprite();
         inventory.AddItem(item.item);
-        Destroy(collid2D.gameObject);
+        Destroy(item.gameObject);
         displayInventory.RefreshDisplay();
     }
 
