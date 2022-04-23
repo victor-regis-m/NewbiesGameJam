@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409e84818bdf0324fbf82baee3752e32, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: 
-  enemyImage: {fileID: 21300000, guid: b1cedd1e52a9c7646a49cfbeb77704f9, type: 3}
+  enemyImage: {fileID: 21300000, guid: d185f3d5937825b40ab83acd004c7360, type: 3}
   enemyDamage: 1
   healthPoints: 1
-  moveSpeed: 4
-  rateOfAttack: 0
+  moveSpeed: 0
+  rateOfAttack: 2
