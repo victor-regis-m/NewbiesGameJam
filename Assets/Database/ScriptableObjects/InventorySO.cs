@@ -9,7 +9,8 @@ public class InventorySO : ScriptableObject
     [SerializeField] int numberOfSlots;
     public List<InventorySlot> container = new List<InventorySlot>();
 
-    //This function Initialise the inventory of its maximum defined size, with a default slot icon
+    /*This function Initialise the inventory of its maximum 
+    defined size, with a default slot icon*/
     public void InitializeInventory()
     {
         defaultSlotIcon.SetSpriteOnItemPrefab(defaultSlotIcon.GetItemimage());
@@ -19,7 +20,8 @@ public class InventorySO : ScriptableObject
         }
     }
 
-    //This function checks for the Item type in the inventory if already have and return true if it does and false otherwise
+    /*This function checks for the Item type in the inventory 
+    if already have and return true if it does and false otherwise*/
     public bool CheckIfHaveItemType(ItemSO item)
     {
         for(int i = 0; i < container.Count; i++) 
@@ -32,7 +34,9 @@ public class InventorySO : ScriptableObject
         return false;
     }
 
-    //This function adds an item if the slot I want to place the item is same with my default slot than I can place my item on this slot
+    /*This function adds an item if the slot I want to place 
+    the item is same with my default slot than I can place my 
+    item on this slot*/
     public void AddItem(ItemSO item)
     {
         for(int i = 0; i < container.Count; i++) 
@@ -45,13 +49,16 @@ public class InventorySO : ScriptableObject
         }
     }
 
-    //To be reworked
+    /*This function Drops an item from the inventory 
+    by destroying the one from UI and returning the item*/
     public void DropItem(int index)
     {
-        if(container.Count > 0)
-        {
-            container[index].item = defaultSlotIcon;
-        }
+        container[index].item = defaultSlotIcon;
+    }
+
+    public ItemSO GetDefaultSlotIcon()
+    {
+        return defaultSlotIcon;
     }
 }
 
