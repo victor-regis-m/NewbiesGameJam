@@ -14,17 +14,17 @@ public class GhostBehaviour : MonoBehaviour, IEnemyActions
     }
     public void Attack()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Die()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void GetHit()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void Move()

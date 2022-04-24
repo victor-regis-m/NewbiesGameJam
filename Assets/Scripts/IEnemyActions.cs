@@ -11,3 +11,13 @@ public interface IEnemyActions
     void ParseMoveSpeed(float ms);
     void ParseRateOfAttack(float rate);
 }
+
+public enum AttackType
+{
+    Linear, Parabolic
+}
+
+public enum StartingMovingDirection
+{
+    Left, Right
+}

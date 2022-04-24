@@ -64,4 +64,6 @@ public class PlayerMovement : MonoBehaviour
         if(otherObject.tag == "Ground")
             canJummp = true;
     }
+
+    public float GetPlayerWeight() => playerWeight;
 }

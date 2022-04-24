@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TreeBehaviour : MonoBehaviour, IEnemyActions
 {
-    [SerializeField]Sprite projectile;
+    [SerializeField] Sprite projectileSprite;
+    [SerializeField] AttackType attackType;
     float attackTimeCounter;
     float rateOfAttack;
     public void Attack()
@@ -12,23 +13,30 @@ public class TreeBehaviour : MonoBehaviour, IEnemyActions
         attackTimeCounter+=Time.deltaTime;
         if(attackTimeCounter >= rateOfAttack)
         {
-
+            attackTimeCounter=0;
+            GameObject projectile = new GameObject("Projectile");
+            projectile.transform.position = transform.position;
+            SpriteRenderer sr = projectile.AddComponent<SpriteRenderer>() as SpriteRenderer;
+            sr.sprite = projectileSprite;
+            ProjectileController pc = projectile.AddComponent<ProjectileController>() as ProjectileController;
+            Vector3 direction = attackType== AttackType.Parabolic? new Vector3(-1,1,0): new Vector3(-1,0,0);
+            pc.InitializeProjectileController(attackType, direction);
         }
     }
 
     public void Die()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void GetHit()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void Move()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void ParseMoveSpeed(float ms)
