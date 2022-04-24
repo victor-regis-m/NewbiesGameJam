@@ -14,11 +14,17 @@ public class PlayerMovement : MonoBehaviour
     Vector3 left = new Vector3(1,0,0);
     Vector3 down = new Vector3(0,-1,0);
 
+    int playerHitPoints;
+    float takeDamageCoolDownTime;
+    bool canTakeDamage;
+
     void Start()
     {
         player = gameObject;
         playerRB = GetComponent<Rigidbody2D>();
         canJummp = true;
+        takeDamageCoolDownTime = 3;
+        canTakeDamage=true;
     }
 
     void Update()
@@ -66,4 +72,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public float GetPlayerWeight() => playerWeight;
+
+    public void TakeDamage(float damage)
+    {
+
+    }
 }
