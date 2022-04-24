@@ -7,7 +7,13 @@ public class InventorySO : ScriptableObject
 {
     [SerializeField] ItemSO defaultSlotIcon;
     [SerializeField] int numberOfSlots;
+    [SerializeField] float maxWeight;
+    [SerializeField] float currentWeight;
     public List<InventorySlot> container = new List<InventorySlot>();
+
+    //Getters
+    public ItemSO GetDefaultSlotIcon() => defaultSlotIcon;
+    public float GetMaximumWeight() => maxWeight;
 
     /*This function Initialise the inventory of its maximum 
     defined size, with a default slot icon*/
@@ -56,9 +62,14 @@ public class InventorySO : ScriptableObject
         container[index].item = defaultSlotIcon;
     }
 
-    public ItemSO GetDefaultSlotIcon()
+    public float GetInventoryWeight()
     {
-        return defaultSlotIcon;
+        currentWeight = 0;
+        for(int i = 0; i < container.Count; i++) 
+        {
+            currentWeight += container[i].item.GetItemWeight();
+        }
+        return currentWeight;
     }
 }
 

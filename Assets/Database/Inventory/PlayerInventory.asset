@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSlotIcon: {fileID: 11400000, guid: aa8d81d59784cc847b1e252a664e5ad7, type: 2}
   numberOfSlots: 5
+  maxWeight: 80
+  currentWeight: 57
   container: []
