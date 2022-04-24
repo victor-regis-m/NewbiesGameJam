@@ -7,8 +7,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] InventorySO inventory;
     [SerializeField] UIBar uIBar;
 
+    List<Item> pickableItems;
     DisplayInventory displayInventory;
-    [SerializeField]List<Item> pickableItems;
 
     void Start()
     {
@@ -29,13 +29,13 @@ public class InventoryManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) 
     {
         Item interactable = other.gameObject.GetComponent<Item>();
-        if(interactable!=null)
+        if(interactable != null)
             pickableItems.Add(interactable);
     }
     void OnTriggerExit2D(Collider2D other) 
     {
         Item interactable = other.gameObject.GetComponent<Item>();
-        if(interactable!=null)
+        if(interactable != null)
             pickableItems.Remove(interactable);
     }
 
@@ -47,13 +47,13 @@ public class InventoryManager : MonoBehaviour
 
     private void AddItemLogic()
     {
-        if (Input.GetKeyDown(KeyCode.E) && pickableItems.Count>0)
+        if (Input.GetKeyDown(KeyCode.E) && pickableItems.Count > 0)
         {
             var item = pickableItems[0];
-            pickableItems.Remove(item);
             if (!inventory.CheckIfHaveItemType(item.item))
             {
                 AddItemInInventory(item);
+                pickableItems.Remove(item);
             }
         }
     }
