@@ -7,8 +7,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] InventorySO inventory;
     [SerializeField] UIBar uIBar;
 
-    [SerializeField]List<Item> pickableItems;
     DisplayInventory displayInventory;
+    [SerializeField]List<Item> pickableItems;
 
     void Start()
     {
