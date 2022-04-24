@@ -14,11 +14,17 @@ public class PlayerMovement : MonoBehaviour
     Vector3 left = new Vector3(1,0,0);
     Vector3 down = new Vector3(0,-1,0);
 
+    int playerHitPoints;
+    float takeDamageCoolDownTime;
+    bool canTakeDamage;
+
     void Start()
     {
         player = gameObject;
         playerRB = GetComponent<Rigidbody2D>();
         canJummp = true;
+        takeDamageCoolDownTime = 3;
+        canTakeDamage=true;
     }
 
     void Update()
@@ -36,6 +42,15 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         gameObject.transform.position +=  Input.GetAxis("Horizontal")*left*playerSpeed*Time.deltaTime/playerWeight;
+        AdjustGameObjectDirectionToMovement();
+    }
+
+    void AdjustGameObjectDirectionToMovement()
+    {
+        if(Input.GetKeyDown(KeyCode.D))
+            transform.rotation = Quaternion.Euler(0,0,0);
+        if(Input.GetKeyDown(KeyCode.A))
+            transform.rotation = Quaternion.Euler(0,180,0);
     }
 
     void Jump()
@@ -54,5 +69,12 @@ public class PlayerMovement : MonoBehaviour
         GameObject otherObject = other.gameObject;
         if(otherObject.tag == "Ground")
             canJummp = true;
+    }
+
+    public float GetPlayerWeight() => playerWeight;
+
+    public void TakeDamage(float damage)
+    {
+
     }
 }
