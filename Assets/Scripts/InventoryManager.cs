@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] InventorySO inventory;
+    [SerializeField] UIBar uIBar;
 
     DisplayInventory displayInventory;
     [SerializeField]List<Item> pickableItems;
@@ -13,6 +14,9 @@ public class InventoryManager : MonoBehaviour
     {
         pickableItems = new List<Item>();
         displayInventory = FindObjectOfType<DisplayInventory>();
+        displayInventory.Initiate();
+        uIBar.SetMaxValue(inventory.GetMaximumWeight());
+        uIBar.SetCurrentValue(inventory.GetInventoryWeight());
     }
     
     void Update()
@@ -60,6 +64,7 @@ public class InventoryManager : MonoBehaviour
         inventory.AddItem(item.item);
         Destroy(item.gameObject);
         displayInventory.RefreshDisplay();
+        uIBar.SetCurrentValue(inventory.GetInventoryWeight());
     }
 
     private void DropItemLogic()
@@ -95,6 +100,7 @@ public class InventoryManager : MonoBehaviour
             itemToSpawn.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             inventory.DropItem(index);
             displayInventory.RefreshDisplay();
+            uIBar.SetCurrentValue(inventory.GetInventoryWeight());
         }
     }
 }

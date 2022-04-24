@@ -15,5 +15,5 @@ MonoBehaviour:
   itemPrefab: {fileID: 5348004916760088609, guid: e309062da7cc4e443944bda88fd124aa, type: 3}
   itemImage: {fileID: -5177388603050735206, guid: d058bbf7e52a3e541b7d8b7f9ac15308, type: 3}
   itemName: 
-  itemWeight: 0
+  itemWeight: 15
   type: 2

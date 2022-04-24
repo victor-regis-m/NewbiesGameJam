@@ -20,25 +20,10 @@ public abstract class ItemSO : ScriptableObject
     [SerializeField] float itemWeight;
     public ItemType type;
 
-    public GameObject GetItemPrefab()
-    {
-        return itemPrefab;
-    }
-
-    public Sprite GetItemimage()
-    {
-        return itemImage;
-    }
-
-    public string GetItemName()
-    {
-        return itemName;
-    }
-    
-    public float GetItemWeight()
-    {
-        return itemWeight;
-    }
+    public GameObject GetItemPrefab() => itemPrefab;
+    public Sprite GetItemimage() => itemImage;
+    public string GetItemName() => itemName;
+    public float GetItemWeight() => itemWeight;
 
     public void SetSpriteOnItemPrefab(Sprite sprite)
     {
