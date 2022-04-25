@@ -17,6 +17,7 @@ public class ProjectileController : MonoBehaviour
         _direction = direction.normalized;
         _startTime = Time.time;
         _startPos = transform.position;
+        tag = "Projectile";
     }
 
     // Update is called once per frame

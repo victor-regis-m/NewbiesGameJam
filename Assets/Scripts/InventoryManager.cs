@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
         displayInventory.Initiate();
         uIBar.SetMaxValue(inventory.GetMaximumWeight());
         uIBar.SetCurrentValue(inventory.GetInventoryWeight());
+        PlayerController.UpdateInventoryWeight(inventory.GetInventoryWeight());
     }
     
     void Update()
@@ -65,6 +66,7 @@ public class InventoryManager : MonoBehaviour
         Destroy(item.gameObject);
         displayInventory.RefreshDisplay();
         uIBar.SetCurrentValue(inventory.GetInventoryWeight());
+        PlayerController.UpdateInventoryWeight(inventory.GetInventoryWeight());
     }
 
     private void DropItemLogic()
@@ -101,6 +103,7 @@ public class InventoryManager : MonoBehaviour
             inventory.DropItem(index);
             displayInventory.RefreshDisplay();
             uIBar.SetCurrentValue(inventory.GetInventoryWeight());
+            PlayerController.UpdateInventoryWeight(inventory.GetInventoryWeight());
         }
     }
 }

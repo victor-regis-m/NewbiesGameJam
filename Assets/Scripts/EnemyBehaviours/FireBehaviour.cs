@@ -21,7 +21,7 @@ public class FireBehaviour : MonoBehaviour, IEnemyActions
         if(playerIsInRadius)
         {
             Vector3 direction = (player.transform.position-transform.position).normalized;
-            player.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y)*explosionForce/player.GetComponent<PlayerMovement>().GetPlayerWeight();
+            player.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y)*explosionForce/player.GetComponent<PlayerController>().GetPlayerWeight();
         }
         Destroy(gameObject);
     }
@@ -63,7 +63,7 @@ public class FireBehaviour : MonoBehaviour, IEnemyActions
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.GetComponent<PlayerMovement>()!=null)
+        if(other.GetComponent<PlayerController>()!=null)
         {
             if(player==null)
                 player = other.gameObject;
