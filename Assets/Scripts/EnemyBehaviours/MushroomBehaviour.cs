@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MushroomBehaviour : MonoBehaviour, IEnemyActions
+public class MushroomBehaviour : EnemyBase
 {
     float moveSpeed;
     float waitTime;
@@ -10,19 +10,8 @@ public class MushroomBehaviour : MonoBehaviour, IEnemyActions
     float moveCounter;
     [SerializeField] StartingMovingDirection startingMovingDirection;
     Vector3 movingDirection;
-    public void Attack()
-    {
-    }
 
-    public void Die()
-    {
-    }
-
-    public void GetHit()
-    {
-    }
-
-    public void Move()
+    override public void Move()
     {
         moveCounter+=Time.deltaTime;
         if(moveCounter<=moveTime)
@@ -36,11 +25,7 @@ public class MushroomBehaviour : MonoBehaviour, IEnemyActions
         }
     }
 
-    public void ParseMoveSpeed(float ms) => moveSpeed=ms;
-
-    public void ParseRateOfAttack(float rate)
-    {
-    }
+    override public void ParseMoveSpeed(float ms) => moveSpeed=ms;
 
     // Start is called before the first frame update
     void Start()

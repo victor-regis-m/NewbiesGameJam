@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostBehaviour : MonoBehaviour, IEnemyActions
+public class GhostBehaviour : EnemyBase
 {
     float initialTime;
     float moveSpeed;
@@ -12,22 +12,8 @@ public class GhostBehaviour : MonoBehaviour, IEnemyActions
         initialTime = Time.time;
         initialPosition = transform.position;
     }
-    public void Attack()
-    {
-        
-    }
 
-    public void Die()
-    {
-        
-    }
-
-    public void GetHit()
-    {
-       
-    }
-
-    public void Move()
+    override public void Move()
     {
         float timeDelta = Time.time - initialTime;
         float ypos = -0.75f*Mathf.Sin(timeDelta/1.5f)*moveSpeed;
@@ -35,9 +21,5 @@ public class GhostBehaviour : MonoBehaviour, IEnemyActions
         transform.position = new Vector3(xpos, ypos, 0) + initialPosition;
     }
 
-    public void ParseMoveSpeed(float ms) => moveSpeed = ms;
-
-    public void ParseRateOfAttack(float rate)
-    {
-    }
+    override public void ParseMoveSpeed(float ms) => moveSpeed = ms;
 }
