@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    IEnemyActions enemyActionsHandler;
+    EnemyBase enemyActionsHandler;
     [SerializeField]EnemySO enemySO;
     void Awake()
     {
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
         sr.sprite = enemySO.GetEnemySprite();
-        enemyActionsHandler = GetComponent<IEnemyActions>();
+        enemyActionsHandler = GetComponent<EnemyBase>();
         enemyActionsHandler.ParseMoveSpeed(enemySO.GetMoveSpeed());
         enemyActionsHandler.ParseRateOfAttack(enemySO.GetRateOfAttack());
     }

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBehaviour : MonoBehaviour, IEnemyActions
+public class FireBehaviour : EnemyBase
 {
     float waitTime;
     bool startExplosion;
     float timeCounter;
     GameObject player;
     bool playerIsInRadius;
-    float explosionForce = 400;
+    float explosionForce;
+    float explosionDamage;
     
-    public void Attack()
+    override public void Attack()
     {
         if(!startExplosion)
             return;
@@ -21,29 +22,12 @@ public class FireBehaviour : MonoBehaviour, IEnemyActions
         if(playerIsInRadius)
         {
             Vector3 direction = (player.transform.position-transform.position).normalized;
-            player.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y)*explosionForce/player.GetComponent<PlayerController>().GetPlayerWeight();
+            PlayerController pc = player.GetComponent<PlayerController>();
+            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction.x, direction.y)*explosionForce/pc.GetPlayerWeight());
+            pc.enableRagdoll();
+            pc.TakeDamage(explosionDamage);
         }
         Destroy(gameObject);
-    }
-
-    public void Die()
-    {
-    }
-
-    public void GetHit()
-    {
-    }
-
-    public void Move()
-    {
-    }
-
-    public void ParseMoveSpeed(float ms)
-    {
-    }
-
-    public void ParseRateOfAttack(float rate)
-    {
     }
 
     // Start is called before the first frame update
@@ -53,6 +37,9 @@ public class FireBehaviour : MonoBehaviour, IEnemyActions
         startExplosion=false;
         player = null;
         playerIsInRadius=false;
+        explosionForce= 5000;
+        collisionDamage = 10;
+        explosionDamage = 10;
     }
 
     // Update is called once per frame

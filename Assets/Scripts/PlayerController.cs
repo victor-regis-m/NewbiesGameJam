@@ -15,13 +15,14 @@ public class PlayerController : MonoBehaviour
     Vector3 left = new Vector3(1,0,0);
     Vector3 down = new Vector3(0,-1,0);
 
-    int playerHitPoints;
+    [SerializeField]float playerHitPoints;
     int playerMaxHitPoints;
     float takeDamageCoolDownTime;
     float takeDamageTimer;
     bool canTakeDamage;
     static float inventoryWeight;
     float playerTotalWeight;
+    [SerializeField]bool isRagdoll;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         playerHitPoints = playerMaxHitPoints;
         UpdateTotalWeight();
         uiBar.SetMaxValue(playerMaxHitPoints);
+        isRagdoll=false;
     }
 
     void Update()
@@ -54,8 +56,11 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        AdjustGameObjectDirectionToMovement();
-        playerRB.velocity = new Vector2((Input.GetAxis("Horizontal")*left*playerSpeed/playerTotalWeight).x, playerRB.velocity.y) ;
+        if(!isRagdoll)
+        {
+            AdjustGameObjectDirectionToMovement();
+            playerRB.velocity = new Vector2((Input.GetAxis("Horizontal")*left*playerSpeed/playerTotalWeight).x, playerRB.velocity.y);
+        }
     }
 
     void AdjustGameObjectDirectionToMovement()
@@ -74,19 +79,37 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        CheckJumpingCondition(other);
+        CheckJumpingAndRagdollCondition(other);
+        if(other.gameObject.tag == "Enemy")
+        {
+            TakeDamage(other.gameObject.GetComponent<EnemyBase>().DealCollisionDamage());
+            Collider2D enemyCollider = other.gameObject.GetComponent<Collider2D>();
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(enemyCollider, playerCollider);
+            IEnumerator coroutine = ResetCollision(playerCollider,enemyCollider);
+            StartCoroutine(coroutine);
+        }
     }
 
-    private void CheckJumpingCondition(Collision2D other)
+    IEnumerator ResetCollision(Collider2D pc, Collider2D oc)
+    {
+        yield return new WaitForSeconds(takeDamageCoolDownTime);
+        Physics2D.IgnoreCollision(oc, pc, false);
+    }
+
+    private void CheckJumpingAndRagdollCondition(Collision2D other)
     {
         GameObject otherObject = other.gameObject;
         if(otherObject.tag == "Ground")
+        {
             canJump = true;
+            isRagdoll=false;
+        }
     }
 
     public float GetPlayerWeight() => playerTotalWeight;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if(canTakeDamage)
         {
@@ -112,4 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         playerTotalWeight = playerWeight + inventoryWeight;
     }
+
+    public void enableRagdoll() => isRagdoll =true;
+
 }

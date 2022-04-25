@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeBehaviour : MonoBehaviour, IEnemyActions
+public class TreeBehaviour : EnemyBase
 {
     [SerializeField] Sprite projectileSprite;
     [SerializeField] AttackType attackType;
     float attackTimeCounter;
     float rateOfAttack;
-    public void Attack()
+    override public void Attack()
     {
         attackTimeCounter+=Time.deltaTime;
         if(attackTimeCounter >= rateOfAttack)
@@ -24,26 +24,7 @@ public class TreeBehaviour : MonoBehaviour, IEnemyActions
         }
     }
 
-    public void Die()
-    {
-        
-    }
-
-    public void GetHit()
-    {
-       
-    }
-
-    public void Move()
-    {
-       
-    }
-
-    public void ParseMoveSpeed(float ms)
-    {
-    }
-    
-    public void ParseRateOfAttack(float rate) => rateOfAttack = rate;
+    override public void ParseRateOfAttack(float rate) => rateOfAttack = rate;
 
     // Start is called before the first frame update
     void Start()
