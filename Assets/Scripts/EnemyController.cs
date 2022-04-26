@@ -6,15 +6,14 @@ public class EnemyController : MonoBehaviour
 {
     EnemyBase enemyActionsHandler;
     [SerializeField]EnemySO enemySO;
-    float cachedHealthPoints;
     void Awake()
     {
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
-        cachedHealthPoints = enemySO.GetHealthPoints();
         sr.sprite = enemySO.GetEnemySprite();
         enemyActionsHandler = GetComponent<EnemyBase>();
         enemyActionsHandler.ParseMoveSpeed(enemySO.GetMoveSpeed());
         enemyActionsHandler.ParseRateOfAttack(enemySO.GetRateOfAttack());
+        enemyActionsHandler.ParseHealthPoints(enemySO.GetHealthPoints());
     }
 
     // Update is called once per frame
@@ -26,25 +25,16 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
-        if(enemySO.IsAlive())
+        if(enemyActionsHandler.IsAlive())
             enemyActionsHandler.Move();
     }
 
     void Attack()
     {
-        if(enemySO.IsAlive())
+        if(enemyActionsHandler.IsAlive())
             enemyActionsHandler.Attack();
         else
             enemyActionsHandler.Die();
-    }
-
-    private void OnApplicationQuit() 
-    {
-        enemySO.ResetEnemyHealthPoints(cachedHealthPoints);
-    }
-    private void OnDestroy() 
-    {
-        enemySO.ResetEnemyHealthPoints(cachedHealthPoints);
     }
 
     public EnemyBase GetEnemyBase() => enemyActionsHandler;

@@ -9,14 +9,8 @@ public class EnemySO : ScriptableObject
     [SerializeField] float enemyHealthPoints;
     [SerializeField] float moveSpeed;
     [SerializeField] float enemyRateOfAttack;
-
-    public bool IsAlive() => enemyHealthPoints>0;
     public Sprite GetEnemySprite() => enemyImage;
     public float GetMoveSpeed() => moveSpeed;
     public float GetRateOfAttack() => enemyRateOfAttack;
     public float GetHealthPoints() => enemyHealthPoints;
-    public void ResetEnemyHealthPoints(float hp) => enemyHealthPoints=hp;
-
-    public void TakeDamage(float damage) => enemyHealthPoints -= damage;
-
 }

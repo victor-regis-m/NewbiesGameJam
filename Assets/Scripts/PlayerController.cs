@@ -147,6 +147,6 @@ public class PlayerController : MonoBehaviour
         EnemyController enemy = item.gameObject.GetComponent<EnemyController>();
         if(enemy != null)
             //print("Ello mate");
-            enemy.GetEnemyBase().GetHit(playerStats.GetTotalDamagePoints(), enemy.GetEnemySO());
+            enemy.GetEnemyBase().GetHit(playerStats.GetTotalDamagePoints());
     }
 }
