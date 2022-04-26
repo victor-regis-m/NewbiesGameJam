@@ -17,3 +17,6 @@ MonoBehaviour:
   itemName: 
   itemWeight: 12
   type: 3
+  armorPoints: 2
+  moveSpeedPoints: 10
+  jumpForcePoints: 0

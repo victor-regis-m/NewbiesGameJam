@@ -17,3 +17,4 @@ MonoBehaviour:
   itemName: 
   itemWeight: 5
   type: 4
+  healthPoints: 20

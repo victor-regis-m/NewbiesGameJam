@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Enemy", menuName = "Database/Create Enemy", order = 0)]
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Database/Create Enemy", order = 2)]
 public class EnemySO : ScriptableObject
 {
     [SerializeField] Sprite enemyImage;

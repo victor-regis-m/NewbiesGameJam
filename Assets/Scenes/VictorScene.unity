@@ -1260,6 +1260,7 @@ GameObject:
   - component: {fileID: 1382226249}
   - component: {fileID: 1382226248}
   - component: {fileID: 1382226253}
+  - component: {fileID: 1382226254}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1407,12 +1408,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcdc7fc25f73444abf94bfc5d8a7204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 500
   playerWeight: 80
-  jumpForce: 700
-  uiBar: {fileID: 1224707425}
-  playerHitPoints: 0
+  jumpForce: 300
+  uIBar: {fileID: 1224707425}
+  playerStats: {fileID: 11400000, guid: f643c3df6fb42cb4a82e09a71ced26c5, type: 2}
+  takeDamageCoolDownTime: 3
   isRagdoll: 0
+--- !u!114 &1382226254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382226247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a34472136e01428ac46a16d522671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: ea0fcb01d8ecf6e48b6821064cda843e, type: 2}
+  stats: {fileID: 11400000, guid: f643c3df6fb42cb4a82e09a71ced26c5, type: 2}
 --- !u!1 &1623597458
 GameObject:
   m_ObjectHideFlags: 0

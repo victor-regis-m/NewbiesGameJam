@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: 
   itemWeight: 25
   type: 0
+  damagePoints: 20
+  rangeBonusPoints: 3
