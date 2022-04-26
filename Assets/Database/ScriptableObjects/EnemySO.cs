@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemySO : ScriptableObject
 {
     [SerializeField] Sprite enemyImage;
-    [SerializeField] int enemyDamage;
-    [SerializeField] int enemyHealthPoints;
+    [SerializeField] float enemyDamage;
+    [SerializeField] float enemyHealthPoints;
     [SerializeField] float moveSpeed;
     [SerializeField] float enemyRateOfAttack;
 
@@ -14,9 +14,9 @@ public class EnemySO : ScriptableObject
     public Sprite GetEnemySprite() => enemyImage;
     public float GetMoveSpeed() => moveSpeed;
     public float GetRateOfAttack() => enemyRateOfAttack;
-    public int GetHealthPoints()=>enemyHealthPoints;
-    public void ResetEnemyHealthPoints(int hp)=>enemyHealthPoints=hp;
+    public float GetHealthPoints() => enemyHealthPoints;
+    public void ResetEnemyHealthPoints(float hp) => enemyHealthPoints=hp;
 
-    public void TakeDamage(int damage) => enemyHealthPoints-=damage;
+    public void TakeDamage(float damage) => enemyHealthPoints -= damage;
 
 }

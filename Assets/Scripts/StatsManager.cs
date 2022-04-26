@@ -77,7 +77,7 @@ public class StatsManager : MonoBehaviour
         stats.SetBonusInventoryWeight(-stats.GetBonusInventoryWeight());
     }
 
-    public void StatsChangeReset()
+    public void StatsReset()
     {
         SetStatsToDefault();
         SetNewStats();

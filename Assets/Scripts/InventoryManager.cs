@@ -61,7 +61,7 @@ public class InventoryManager : MonoBehaviour
             {
                 AddItemInInventory(item);
                 pickableItems.Remove(item);
-                stats.StatsChangeReset();
+                stats.StatsReset();
             }
         }
     }
@@ -97,7 +97,7 @@ public class InventoryManager : MonoBehaviour
         {
             DropItem(4);
         }
-        stats.StatsChangeReset();
+        stats.StatsReset();
     }
 
     void DropItem(int index)

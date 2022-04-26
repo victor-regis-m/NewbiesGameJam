@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     EnemyBase enemyActionsHandler;
     [SerializeField]EnemySO enemySO;
-    int cachedHealthPoints;
+    float cachedHealthPoints;
     void Awake()
     {
         SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>() as SpriteRenderer;

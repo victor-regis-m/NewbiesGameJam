@@ -18,7 +18,7 @@ MonoBehaviour:
   baseDamagePoints: 10
   baseMoveSpeedPoints: 500
   baseRangePoints: 10
-  baseJumpForcePoints: 300
+  baseJumpForcePoints: 700
   baseInventoryWeight: 80
   bonusHealthPoints: 0
   bonusArmorPoints: 0

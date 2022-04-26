@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     Vector2 hitboxSize;
     float rateOfAttack;
     float attackCooldownCounter;
-    int playerDamage;
 
     void Start()
     {
@@ -29,11 +28,10 @@ public class PlayerController : MonoBehaviour
         takeDamageTimer = 0;
         uIBar.SetMaxValue(playerStats.GetTotalHealthPoints()); 
         isRagdoll = false;
-        playerDamage=1;
         hitboxDistance = 2;
         hitboxSize = new Vector2(2,3);
         rateOfAttack = 1;
-        attackCooldownCounter=0;
+        attackCooldownCounter = 0;
     }
 
     void Update()
@@ -128,8 +126,8 @@ public class PlayerController : MonoBehaviour
     public void enableRagdoll() => isRagdoll = true;
     void Attack()
     {
-        attackCooldownCounter+=Time.deltaTime;
-        if(attackCooldownCounter<rateOfAttack)
+        attackCooldownCounter += Time.deltaTime;
+        if(attackCooldownCounter < rateOfAttack)
             return;
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -147,8 +145,8 @@ public class PlayerController : MonoBehaviour
     void HitItem(Collider2D item)
     {
         EnemyController enemy = item.gameObject.GetComponent<EnemyController>();
-        if(enemy!=null)
+        if(enemy != null)
             //print("Ello mate");
-            enemy.GetEnemyBase().GetHit(playerDamage, enemy.GetEnemySO());
+            enemy.GetEnemyBase().GetHit(playerStats.GetTotalDamagePoints(), enemy.GetEnemySO());
     }
 }

@@ -8,7 +8,7 @@ public abstract class EnemyBase : MonoBehaviour
     internal float moveSpeed;
     public virtual void Move(){}
     public virtual void Attack(){}
-    public virtual void GetHit(int damage, EnemySO enemySO){enemySO.TakeDamage(damage);}
+    public virtual void GetHit(float damage, EnemySO enemySO){enemySO.TakeDamage(damage);}
     public virtual void Die(){Destroy(gameObject);}
     public virtual void ParseMoveSpeed(float ms){}
     public virtual void ParseRateOfAttack(float rate){}
