@@ -9,17 +9,23 @@ public class InventoryManager : MonoBehaviour
 
     List<Item> pickableItems;
     DisplayInventory displayInventory;
+    StatsManager stats;
 
     void Start()
     {
-        pickableItems = new List<Item>();
-        displayInventory = FindObjectOfType<DisplayInventory>();
+        InitialiseVariables();
         displayInventory.Initiate();
         uIBar.SetMaxValue(inventory.GetMaximumWeight());
         uIBar.SetCurrentValue(inventory.GetInventoryWeight());
-        PlayerController.UpdateInventoryWeight(inventory.GetInventoryWeight());
     }
-    
+
+    void InitialiseVariables()
+    {
+        pickableItems = new List<Item>();
+        displayInventory = FindObjectOfType<DisplayInventory>();
+        stats = gameObject.GetComponent<StatsManager>();
+    }
+
     void Update()
     {
         /*At key down this code drops the element on position 
@@ -55,6 +61,7 @@ public class InventoryManager : MonoBehaviour
             {
                 AddItemInInventory(item);
                 pickableItems.Remove(item);
+                stats.StatsChangeReset();
             }
         }
     }
@@ -66,7 +73,6 @@ public class InventoryManager : MonoBehaviour
         Destroy(item.gameObject);
         displayInventory.RefreshDisplay();
         uIBar.SetCurrentValue(inventory.GetInventoryWeight());
-        PlayerController.UpdateInventoryWeight(inventory.GetInventoryWeight());
     }
 
     private void DropItemLogic()
@@ -91,6 +97,7 @@ public class InventoryManager : MonoBehaviour
         {
             DropItem(4);
         }
+        stats.StatsChangeReset();
     }
 
     void DropItem(int index)
@@ -103,7 +110,6 @@ public class InventoryManager : MonoBehaviour
             inventory.DropItem(index);
             displayInventory.RefreshDisplay();
             uIBar.SetCurrentValue(inventory.GetInventoryWeight());
-            PlayerController.UpdateInventoryWeight(inventory.GetInventoryWeight());
         }
     }
 }

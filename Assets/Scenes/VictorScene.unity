@@ -1203,6 +1203,7 @@ GameObject:
   - component: {fileID: 1382226249}
   - component: {fileID: 1382226248}
   - component: {fileID: 1382226253}
+  - component: {fileID: 1382226254}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1350,13 +1351,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcdc7fc25f73444abf94bfc5d8a7204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 500
   playerWeight: 80
-  jumpForce: 700
-  uiBar: {fileID: 1224707425}
-  playerHitPoints: 0
+  jumpForce: 300
+  uIBar: {fileID: 1224707425}
+  playerStats: {fileID: 11400000, guid: f643c3df6fb42cb4a82e09a71ced26c5, type: 2}
+  takeDamageCoolDownTime: 3
   isRagdoll: 0
---- !u!1001 &1617771265
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1413,7 +1413,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04f94bed1f5414647902cbe8e92c4ae1, type: 3}
---- !u!1 &1623597458
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

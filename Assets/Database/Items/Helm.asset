@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: 
   itemWeight: 7
   type: 1
+  armorPoints: 2
+  healthPoints: 5
