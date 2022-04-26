@@ -11,6 +11,7 @@ public class GhostBehaviour : EnemyBase
     {
         initialTime = Time.time;
         initialPosition = transform.position;
+        collisionDamage = 10;
     }
 
     override public void Move()

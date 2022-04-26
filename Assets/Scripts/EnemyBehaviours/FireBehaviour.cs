@@ -11,7 +11,6 @@ public class FireBehaviour : EnemyBase
     bool playerIsInRadius;
     float explosionForce;
     float explosionDamage;
-    float collisionDamage;
     
     override public void Attack()
     {
@@ -23,17 +22,12 @@ public class FireBehaviour : EnemyBase
         if(playerIsInRadius)
         {
             Vector3 direction = (player.transform.position-transform.position).normalized;
-            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction.x, direction.y)*explosionForce);
             PlayerController pc = player.GetComponent<PlayerController>();
+            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction.x, direction.y)*explosionForce/pc.GetPlayerWeight());
             pc.enableRagdoll();
             pc.TakeDamage(explosionDamage);
         }
         Destroy(gameObject);
-    }
-
-    public override float DealCollisionDamage()
-    {
-        return collisionDamage;
     }
 
     // Start is called before the first frame update
@@ -43,7 +37,7 @@ public class FireBehaviour : EnemyBase
         startExplosion=false;
         player = null;
         playerIsInRadius=false;
-        explosionForce= 150;
+        explosionForce= 5000;
         collisionDamage = 10;
         explosionDamage = 10;
     }

@@ -34,11 +34,7 @@ public class MushroomBehaviour : EnemyBase
         waitTime=1.5f;
         moveTime=3;
         movingDirection = startingMovingDirection==StartingMovingDirection.Left ? new Vector3(-1,0,0) : new Vector3(1,0,0); 
+        collisionDamage = 10;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

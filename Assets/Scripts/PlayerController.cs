@@ -83,8 +83,18 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             TakeDamage(other.gameObject.GetComponent<EnemyBase>().DealCollisionDamage());
-            Physics2D.IgnoreCollision(other.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Collider2D enemyCollider = other.gameObject.GetComponent<Collider2D>();
+            Collider2D playerCollider = GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(enemyCollider, playerCollider);
+            IEnumerator coroutine = ResetCollision(playerCollider,enemyCollider);
+            StartCoroutine(coroutine);
         }
+    }
+
+    IEnumerator ResetCollision(Collider2D pc, Collider2D oc)
+    {
+        yield return new WaitForSeconds(takeDamageCoolDownTime);
+        Physics2D.IgnoreCollision(oc, pc, false);
     }
 
     private void CheckJumpingAndRagdollCondition(Collision2D other)
