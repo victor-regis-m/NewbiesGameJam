@@ -5,7 +5,6 @@ using UnityEngine;
 public class GhostBehaviour : EnemyBase
 {
     float initialTime;
-    float moveSpeed;
     Vector3 initialPosition;
     void Start()
     {

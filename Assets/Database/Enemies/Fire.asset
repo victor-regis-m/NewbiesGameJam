@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyImage: {fileID: 21300000, guid: a916435e22525c94690d7193a8910dd7, type: 3}
   enemyDamage: 1
-  healthPoints: 1
+  enemyHealthPoints: 1
   moveSpeed: 0
-  rateOfAttack: 2
+  enemyRateOfAttack: 0
