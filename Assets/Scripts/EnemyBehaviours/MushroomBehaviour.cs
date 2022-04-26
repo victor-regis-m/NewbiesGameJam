@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MushroomBehaviour : EnemyBase
 {
-    float moveSpeed;
     float waitTime;
     float moveTime;
     float moveCounter;
