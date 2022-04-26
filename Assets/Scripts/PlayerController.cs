@@ -17,12 +17,23 @@ public class PlayerController : MonoBehaviour
     Vector3 left = new Vector3(1,0,0);
     //Vector3 down = new Vector3(0,-1,0);
 
+    float hitboxDistance;
+    Vector2 hitboxSize;
+    float rateOfAttack;
+    float attackCooldownCounter;
+    int playerDamage;
+
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
         takeDamageTimer = 0;
         uIBar.SetMaxValue(playerStats.GetTotalHealthPoints()); 
         isRagdoll = false;
+        playerDamage=1;
+        hitboxDistance = 2;
+        hitboxSize = new Vector2(2,3);
+        rateOfAttack = 1;
+        attackCooldownCounter=0;
     }
 
     void Update()
@@ -40,6 +51,7 @@ public class PlayerController : MonoBehaviour
             canTakeDamage = true; 
         else
             takeDamageTimer += Time.deltaTime;      
+        Attack();
     }
 
     void MovementControl()
@@ -111,7 +123,32 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(takeDamageCoolDownTime);
         Physics2D.IgnoreCollision(pc, ec, false);
     }
-
+    
     public float GetPlayerWeight() => playerStats.GetTotalInventoryWeight();
     public void enableRagdoll() => isRagdoll = true;
+    void Attack()
+    {
+        attackCooldownCounter+=Time.deltaTime;
+        if(attackCooldownCounter<rateOfAttack)
+            return;
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Vector3 distanceVector = transform.rotation.y == 0 ? new Vector3(hitboxDistance,0,0) : new Vector3(-hitboxDistance,0,0);
+            Vector2 hitboxPosition = transform.position + distanceVector;
+            Collider2D[] itemsHit = Physics2D.OverlapBoxAll(hitboxPosition, hitboxSize,0);
+            foreach(var item in itemsHit)
+            {
+                print(item.gameObject.name);
+                HitItem(item);
+            }
+        }
+    }
+
+    void HitItem(Collider2D item)
+    {
+        EnemyController enemy = item.gameObject.GetComponent<EnemyController>();
+        if(enemy!=null)
+            //print("Ello mate");
+            enemy.GetEnemyBase().GetHit(playerDamage, enemy.GetEnemySO());
+    }
 }
