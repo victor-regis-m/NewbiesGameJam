@@ -15,10 +15,6 @@ public class PlayerController : MonoBehaviour
     bool canTakeDamage = true;
 
     Vector3 left = new Vector3(1,0,0);
-    //Vector3 down = new Vector3(0,-1,0);
-
-    float hitboxDistance;
-    Vector2 hitboxSize;
     float rateOfAttack;
     float attackCooldownCounter;
 
@@ -28,8 +24,6 @@ public class PlayerController : MonoBehaviour
         takeDamageTimer = 0;
         uIBar.SetMaxValue(playerStats.GetTotalHealthPoints()); 
         isRagdoll = false;
-        hitboxDistance = 2;
-        hitboxSize = new Vector2(2,3);
         rateOfAttack = 1;
         attackCooldownCounter = 0;
     }
@@ -96,6 +90,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D other) 
+    {
+        CheckJumpingAndRagdollCondition(other);
+    }
+
     private void CheckJumpingAndRagdollCondition(Collision2D other)
     {
         GameObject otherObject = other.gameObject;
@@ -119,7 +118,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator ResetCollision(Collider2D pc, Collider2D ec)
     {
         yield return new WaitForSeconds(takeDamageCoolDownTime);
-        Physics2D.IgnoreCollision(pc, ec, false);
+        if(ec!=null)
+            Physics2D.IgnoreCollision(pc, ec, false);
     }
     
     public float GetPlayerWeight() => playerStats.GetTotalInventoryWeight();
@@ -131,13 +131,11 @@ public class PlayerController : MonoBehaviour
             return;
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Vector3 distanceVector = transform.rotation.y == 0 ? new Vector3(hitboxDistance,0,0) : new Vector3(-hitboxDistance,0,0);
-            Vector2 hitboxPosition = transform.position + distanceVector;
-            Collider2D[] itemsHit = Physics2D.OverlapBoxAll(hitboxPosition, hitboxSize,0);
+            Collider2D[] itemsHit = Physics2D.OverlapCircleAll(transform.position, playerStats.GetTotalRangePoints());
             foreach(var item in itemsHit)
             {
-                print(item.gameObject.name);
-                HitItem(item);
+                if(IsOnAttckingSide(item))
+                    HitItem(item);
             }
         }
     }
@@ -146,7 +144,14 @@ public class PlayerController : MonoBehaviour
     {
         EnemyController enemy = item.gameObject.GetComponent<EnemyController>();
         if(enemy != null)
-            //print("Ello mate");
             enemy.GetEnemyBase().GetHit(playerStats.GetTotalDamagePoints());
     }
+
+    bool IsOnAttckingSide(Collider2D enemy)
+    {
+        bool isPlayerFacingRight = transform.rotation.y==0;
+        bool isEnemyToPlayerRight = transform.position.x<=enemy.transform.position.x;
+        return (!isPlayerFacingRight&!isEnemyToPlayerRight)|(isPlayerFacingRight&isEnemyToPlayerRight);
+    }
+    
 }
