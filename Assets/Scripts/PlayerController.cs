@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour
     float takeDamageTimer;
     Rigidbody2D playerRB;
     [SerializeField] bool isRagdoll = false;
-    bool canJump = true;
+    [SerializeField]bool canJump = true;
     bool canTakeDamage = true;
 
     Vector3 left = new Vector3(1,0,0);
     float rateOfAttack;
     float attackCooldownCounter;
+    Vector2 footColliderOffset;
+    Vector2 footColliderSize;
 
     void Start()
     {
@@ -26,6 +28,8 @@ public class PlayerController : MonoBehaviour
         isRagdoll = false;
         rateOfAttack = 1;
         attackCooldownCounter = 0;
+        footColliderOffset = new Vector2(0,-1.5f);
+        footColliderSize = new Vector2(1, 0.1f);
     }
 
     void Update()
@@ -33,6 +37,7 @@ public class PlayerController : MonoBehaviour
         uIBar.SetMaxValue(playerStats.GetTotalHealthPoints());
         uIBar.SetCurrentValue(playerStats.GetCurrentHealthPoints());
         DamageCoolDownManager();
+        CheckJumpingAndRagdollCondition();
         MovementControl();
         playerStats.GetTotalInventoryWeight();
     }
@@ -78,7 +83,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        CheckJumpingAndRagdollCondition(other);
         if(other.gameObject.tag == "Enemy")
         {
             TakeDamage(other.gameObject.GetComponent<EnemyBase>().DealCollisionDamage());
@@ -90,18 +94,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D other) 
-    {
-        CheckJumpingAndRagdollCondition(other);
-    }
 
-    private void CheckJumpingAndRagdollCondition(Collision2D other)
+    private void CheckJumpingAndRagdollCondition()
     {
-        GameObject otherObject = other.gameObject;
-        if(otherObject.tag == "Ground")
+        Vector2 position = transform.position;
+        var objectsOverlaping = Physics2D.OverlapBoxAll(position + footColliderOffset, footColliderSize, 0);
+        foreach(var other in objectsOverlaping)
         {
-            canJump = true;
-            isRagdoll = false;
+            GameObject otherObject = other.gameObject;
+            if(otherObject.tag == "Ground" & (!canJump | isRagdoll) & playerRB.velocity.y<=0)
+            {
+                canJump = true;
+                isRagdoll = false;
+            }
         }
     }
 
