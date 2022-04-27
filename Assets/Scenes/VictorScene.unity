@@ -1504,6 +1504,7 @@ MonoBehaviour:
   playerStats: {fileID: 11400000, guid: f643c3df6fb42cb4a82e09a71ced26c5, type: 2}
   takeDamageCoolDownTime: 3
   isRagdoll: 0
+  canJump: 1
 --- !u!114 &1382226254
 MonoBehaviour:
   m_ObjectHideFlags: 0
