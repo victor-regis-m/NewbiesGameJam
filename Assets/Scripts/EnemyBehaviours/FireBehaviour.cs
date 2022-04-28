@@ -33,13 +33,13 @@ public class FireBehaviour : EnemyBase
     // Start is called before the first frame update
     void Start()
     {
-        waitTime = 2;
+        waitTime = 2.5f;
         startExplosion=false;
         player = null;
         playerIsInRadius=false;
         explosionForce= 5000;
-        collisionDamage = 10;
-        explosionDamage = 10;
+        collisionDamage = 1;
+        explosionDamage = 2;
     }
 
     // Update is called once per frame
@@ -61,6 +61,7 @@ public class FireBehaviour : EnemyBase
 
     private void OnTriggerExit2D(Collider2D other) 
     {
-        playerIsInRadius=false;
+        if(other.GetComponent<PlayerController>()!=null)
+            playerIsInRadius=false;
     }
 }

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582b1b5e4bbc1f248983085cff1a0e89, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  currentHealthPoints: 100
-  baseHealthPoints: 100
+  currentHealthPoints: 10
+  baseHealthPoints: 10
   baseArmorPoints: 0
-  baseDamagePoints: 10
+  baseDamagePoints: 1
   baseMoveSpeedPoints: 500
   baseRangePoints: 10
   baseJumpForcePoints: 700
