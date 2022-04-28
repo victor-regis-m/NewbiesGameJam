@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] UIBar uIBar;
     [SerializeField] StatsSO playerStats;
     [SerializeField] float takeDamageCoolDownTime;
+    [SerializeField] HealthBarController healthBarController;
 
     float takeDamageTimer;
     Rigidbody2D playerRB;
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody2D>();
         takeDamageTimer = 0;
-        uIBar.SetMaxValue(playerStats.GetTotalHealthPoints()); 
+        uIBar.SetMaxValue(playerStats.GetTotalHealthPoints());
         isRagdoll = false;
         rateOfAttack = 1;
         attackCooldownCounter = 0;
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
     {
         uIBar.SetMaxValue(playerStats.GetTotalHealthPoints());
         uIBar.SetCurrentValue(playerStats.GetCurrentHealthPoints());
+        healthBarController.SetMaxValue(playerStats.GetTotalHealthPoints());
+        healthBarController.SetCurrentValue(playerStats.GetCurrentHealthPoints());
         DamageCoolDownManager();
         CheckJumpingAndRagdollCondition();
         MovementControl();
