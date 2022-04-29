@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("SFX")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip attackSFX;
+    [SerializeField] AudioClip jumpSFX;
+    [SerializeField] AudioClip jumpLandSFX;
+    [SerializeField] AudioClip stepSFX;
+    [SerializeField] AudioClip takeDamageSFX;
+
+
+    [Header("Other Variables")]
     [SerializeField] UIBar uIBar;
     [SerializeField] StatsSO playerStats;
     [SerializeField] float takeDamageCoolDownTime;
@@ -11,8 +21,10 @@ public class PlayerController : MonoBehaviour
 
     float takeDamageTimer;
     Rigidbody2D playerRB;
+    
+
     [SerializeField] bool isRagdoll = false;
-    [SerializeField]bool canJump = true;
+    [SerializeField] bool canJump = true;
     bool canTakeDamage = true;
 
     Vector3 left = new Vector3(1,0,0);
@@ -67,6 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             AdjustGameObjectDirectionToMovement();
             playerRB.velocity = new Vector2((Input.GetAxis("Horizontal") * left * playerStats.GetTotalMoveSpeedPoints() / playerStats.GetTotalInventoryWeight()).x, playerRB.velocity.y);
+            audioSource.PlayOneShot(stepSFX);
         }
     }
 
@@ -74,6 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         canJump = false;
         playerRB.velocity = new Vector2(playerRB.velocity.x, playerStats.GetTotalJumpForcePoints() / playerStats.GetTotalInventoryWeight());
+        audioSource.PlayOneShot(jumpSFX);
     }
 
     void AdjustGameObjectDirectionToMovement()
@@ -109,6 +123,7 @@ public class PlayerController : MonoBehaviour
             {
                 canJump = true;
                 isRagdoll = false;
+                audioSource.PlayOneShot(jumpLandSFX);
             }
         }
     }
@@ -118,7 +133,10 @@ public class PlayerController : MonoBehaviour
         if(canTakeDamage)
         {
             if((damage - playerStats.GetTotalArmorPoints()) > 0)
+            {
                 playerStats.SetCurrentHealthPoints(-(damage - playerStats.GetTotalArmorPoints()));
+                audioSource.PlayOneShot(takeDamageSFX);
+            }    
             canTakeDamage = false;
         }
     }
@@ -143,7 +161,11 @@ public class PlayerController : MonoBehaviour
             foreach(var item in itemsHit)
             {
                 if(IsOnAttckingSide(item))
+                {
                     HitItem(item);
+                    audioSource.PlayOneShot(attackSFX);
+                }
+                    
             }
         }
     }
@@ -152,7 +174,7 @@ public class PlayerController : MonoBehaviour
     {
         EnemyController enemy = item.gameObject.GetComponent<EnemyController>();
         if(enemy != null)
-            enemy.GetEnemyBase().GetHit(playerStats.GetTotalDamagePoints());
+            enemy.GetEnemyBase().GetHit(playerStats.GetTotalDamagePoints());   
     }
 
     bool IsOnAttckingSide(Collider2D enemy)
