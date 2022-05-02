@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MushroomBehaviour : EnemyBase
 {
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip takeDamage;
+    [SerializeField] AudioClip dead;
+
     float waitTime;
     float moveTime;
     float moveCounter;
@@ -22,6 +26,18 @@ public class MushroomBehaviour : EnemyBase
             movingDirection=-movingDirection;
             moveCounter=0;
         }
+    }
+
+    override public void GetHit(float damage)
+    {
+        healthPoints -= damage;
+        audioSource.PlayOneShot(takeDamage);
+    }
+
+    override public void Die()
+    {
+        audioSource.PlayOneShot(dead);
+        Destroy(gameObject);
     }
 
     override public void ParseMoveSpeed(float ms) => moveSpeed=ms;

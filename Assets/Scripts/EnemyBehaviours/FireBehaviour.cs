@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FireBehaviour : EnemyBase
 {
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip explosion;
     float waitTime;
     bool startExplosion;
     float timeCounter;
@@ -26,6 +28,7 @@ public class FireBehaviour : EnemyBase
             player.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction.x, direction.y)*explosionForce/pc.GetPlayerWeight());
             pc.enableRagdoll();
             pc.TakeDamage(explosionDamage);
+            audioSource.PlayOneShot(explosion);
         }
         Destroy(gameObject);
     }
